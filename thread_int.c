@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <pthread.h>
+
+void *create(void *arg)
+{
+    int *num;
+    num=(int *)arg;
+    printf("Creat parameter is %d\n",*num);
+    return (void *) 0;
+    
+}
+
+int main()
+{
+    pthread_t pt;
+    int rn;
+    
+    int value=100;
+    int *attr=&value;
+    
+    rn=pthread_create(&pt,NULL,create,(void *)attr);
+    
+    if(rn)
+    {
+    	printf("pthread_create is not created \n");
+    	return -1;
+    }
+    
+    sleep(1);
+    printf("pthread_create is created!\n");
+    
+    return 0;
+	
+}
