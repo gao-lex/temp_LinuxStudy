@@ -6,7 +6,7 @@
 
 void  create_file(char *filename)
 { 
-    /*´´½¨µÄÎÄ¼ş¾ßÓĞ¿É¶Á¿ÉĞ´µÄÊôĞÔ*/	
+    /*åˆ›å»ºçš„æ–‡ä»¶å…·æœ‰å¯è¯»å¯å†™çš„å±æ€§*/	
     if(creat(filename,0666)<0)
 	{ 
         printf("create file %s failure!\n",filename); 
@@ -20,7 +20,7 @@ void  create_file(char *filename)
 
 int main(int argc,char *argv[])
 { 
-    /*ÅĞ¶ÏÈë²ÎÓĞÃ»ÓĞ´«ÈëÎÄ¼şÃû */
+    /*åˆ¤æ–­å…¥å‚æœ‰æ²¡æœ‰ä¼ å…¥æ–‡ä»¶å */
    	if(argc<2)
 	{ 
         printf("you haven't input the filename,please try again!\n"); 

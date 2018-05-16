@@ -2,26 +2,26 @@
 #include <pthread.h>
 #include <unistd.h>
 
-/*Ïß³ÌÇåÀíº¯Êı*/
+/*çº¿ç¨‹æ¸…ç†å‡½æ•°*/
 void *clean(void *arg)
 {
     printf("cleanup :%s\n",(char *)arg);
     return (void *)0;
 }
 
-/*Ïß³Ì1µÄÖ´ĞĞº¯Êı*/
+/*çº¿ç¨‹1çš„æ‰§è¡Œå‡½æ•°*/
 void *thr_fn1(void *arg)
 {
     printf("thread 1 start  \n");
 
-	/*½«Ïß³ÌÇåÀíº¯ÊıÑ¹ÈëÇå³ıÕ»Á½´Î*/
+	/*å°†çº¿ç¨‹æ¸…ç†å‡½æ•°å‹å…¥æ¸…é™¤æ ˆä¸¤æ¬¡*/
     pthread_cleanup_push( (void*)clean,"thread 1 first handler");
     pthread_cleanup_push( (void*)clean,"thread 1 second hadler");
     printf("thread 1 push complete  \n");
 
     if(arg)
     {
-        //return((void *)1); //Ïß³ÌÔËĞĞµ½ÕâÀï»á½áÊø£¬ºóÃæµÄ´úÂë²»»á±»ÔËĞĞ¡£ÓÉÓÚÊÇÓÃreturnÍË³ö£¬ËùÒÔ²»»áÖ´ĞĞÏß³ÌÇåÀíº¯Êı¡£
+        //return((void *)1); //çº¿ç¨‹è¿è¡Œåˆ°è¿™é‡Œä¼šç»“æŸï¼Œåé¢çš„ä»£ç ä¸ä¼šè¢«è¿è¡Œã€‚ç”±äºæ˜¯ç”¨returné€€å‡ºï¼Œæ‰€ä»¥ä¸ä¼šæ‰§è¡Œçº¿ç¨‹æ¸…ç†å‡½æ•°ã€‚
 		pthread_exit((void *)1)
     }
     pthread_cleanup_pop(0);
@@ -29,19 +29,19 @@ void *thr_fn1(void *arg)
     return (void *)1;
 }
 
-/*Ïß³Ì2µÄÖ´ĞĞº¯Êı*/
+/*çº¿ç¨‹2çš„æ‰§è¡Œå‡½æ•°*/
 void *thr_fn2(void *arg)
 {
     printf("thread 2 start  \n");
 
-	/*½«Ïß³ÌÇåÀíº¯ÊıÑ¹ÈëÇå³ıÕ»Á½´Î*/
+	/*å°†çº¿ç¨‹æ¸…ç†å‡½æ•°å‹å…¥æ¸…é™¤æ ˆä¸¤æ¬¡*/
     pthread_cleanup_push( (void*)clean,"thread 2 first handler");
     pthread_cleanup_push( (void*)clean,"thread 2 second handler");
     printf("thread 2 push complete  \n");
     
 	if(arg)
     {
-        pthread_exit((void *)2);//Ïß³ÌÔËĞĞµ½ÕâÀï»á½áÊø£¬ºóÃæµÄ´úÂë²»»á±»ÔËĞĞ¡£ÓÉÓÚÊÇÓÃpthread_exitÍË³ö£¬ËùÒÔ»áÖ´ĞĞÏß³ÌÇåÀíº¯Êı¡£Ö´ĞĞµÄË³ĞòÊÇÏÈÑ¹½øÕ»µÄºóÖ´ĞĞ£¬¼´ºó½øÏÈ³ö¡£
+        pthread_exit((void *)2);//çº¿ç¨‹è¿è¡Œåˆ°è¿™é‡Œä¼šç»“æŸï¼Œåé¢çš„ä»£ç ä¸ä¼šè¢«è¿è¡Œã€‚ç”±äºæ˜¯ç”¨pthread_exité€€å‡ºï¼Œæ‰€ä»¥ä¼šæ‰§è¡Œçº¿ç¨‹æ¸…ç†å‡½æ•°ã€‚æ‰§è¡Œçš„é¡ºåºæ˜¯å…ˆå‹è¿›æ ˆçš„åæ‰§è¡Œï¼Œå³åè¿›å…ˆå‡ºã€‚
     }
 
     pthread_cleanup_pop(0);
@@ -55,7 +55,7 @@ int main(void)
     pthread_t tid1,tid2;
     void *tret;
 
-	/*´´½¨Ïß³Ì1²¢Ö´ĞĞÏß³ÌÖ´ĞĞº¯Êı*/
+	/*åˆ›å»ºçº¿ç¨‹1å¹¶æ‰§è¡Œçº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
     err=pthread_create(&tid1,NULL,thr_fn1,(void *)1);
     if(err!=0)
     {
@@ -63,7 +63,7 @@ int main(void)
         return -1;
     }
 
-	/*´´½¨Ïß³Ì2²¢Ö´ĞĞÏß³ÌÖ´ĞĞº¯Êı*/
+	/*åˆ›å»ºçº¿ç¨‹2å¹¶æ‰§è¡Œçº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
     err=pthread_create(&tid2,NULL,thr_fn2,(void *)1);
 	if(err!=0)
     {
@@ -71,7 +71,7 @@ int main(void)
         return -1;
     }
 
-	/*×èÈûµÈ´ıÏß³Ì1ÍË³ö£¬²¢»ñÈ¡Ïß³Ì1µÄ·µ»ØÖµ*/
+	/*é˜»å¡ç­‰å¾…çº¿ç¨‹1é€€å‡ºï¼Œå¹¶è·å–çº¿ç¨‹1çš„è¿”å›å€¼*/
     err=pthread_join(tid1,&tret);
     if(err!=0)
     {
@@ -80,7 +80,7 @@ int main(void)
     }
     printf("thread 1 exit code %d  \n",(int)tret);
 
-	/*×èÈûµÈ´ıÏß³Ì2ÍË³ö£¬²¢»ñÈ¡Ïß³Ì2µÄ·µ»ØÖµ*/
+	/*é˜»å¡ç­‰å¾…çº¿ç¨‹2é€€å‡ºï¼Œå¹¶è·å–çº¿ç¨‹2çš„è¿”å›å€¼*/
     err=pthread_join(tid2,&tret);
     if(err!=0)
     {

@@ -11,6 +11,7 @@
 
 int main(int argc, char *argv[]) 
 { 
+	//æœåŠ¡å™¨ç«¯å»ºç«‹çš„sockfdæè¿°ç¬¦ï¼›æœåŠ¡å™¨ç«¯æ¥å—çš„socketè¿æ¥çš„id
 	int sockfd,new_fd; 
 	struct sockaddr_in server_addr; 
 	struct sockaddr_in client_addr; 
@@ -19,31 +20,31 @@ int main(int argc, char *argv[])
 	char buffer[1024];
 	
 
-	/* ·şÎñÆ÷¶Ë¿ªÊ¼½¨Á¢sockfdÃèÊö·û */ 
+	/* æœåŠ¡å™¨ç«¯å¼€å§‹å»ºç«‹sockfdæè¿°ç¬¦ */ 
 	if((sockfd=socket(AF_INET,SOCK_STREAM,0))==-1) // AF_INET:IPV4;SOCK_STREAM:TCP
 	{ 
 		fprintf(stderr,"Socket error:%s\n\a",strerror(errno)); 
 		exit(1); 
 	} 
 
-	/* ·şÎñÆ÷¶ËÌî³ä sockaddr½á¹¹ */ 
-	bzero(&server_addr,sizeof(struct sockaddr_in)); // ³õÊ¼»¯,ÖÃ0
+	/* æœåŠ¡å™¨ç«¯å¡«å…… sockaddrç»“æ„ */ 
+	bzero(&server_addr,sizeof(struct sockaddr_in)); // åˆå§‹åŒ–,ç½®0
 	server_addr.sin_family=AF_INET;                 // Internet
 	server_addr.sin_addr.s_addr=htonl(INADDR_ANY);  
-	// (½«±¾»úÆ÷ÉÏµÄlongÊı¾İ×ª»¯ÎªÍøÂçÉÏµÄlongÊı¾İ)·şÎñÆ÷³ÌĞòÄÜÔËĞĞÔÚÈÎºÎipµÄÖ÷»úÉÏ  
-	//INADDR_ANY ±íÊ¾Ö÷»ú¿ÉÒÔÊÇÈÎÒâIPµØÖ·£¬¼´·şÎñÆ÷³ÌĞò¿ÉÒÔ°ó¶¨µ½ËùÓĞµÄIPÉÏ
+	// (å°†æœ¬æœºå™¨ä¸Šçš„longæ•°æ®è½¬åŒ–ä¸ºç½‘ç»œä¸Šçš„longæ•°æ®)æœåŠ¡å™¨ç¨‹åºèƒ½è¿è¡Œåœ¨ä»»ä½•ipçš„ä¸»æœºä¸Š  
+	//INADDR_ANY è¡¨ç¤ºä¸»æœºå¯ä»¥æ˜¯ä»»æ„IPåœ°å€ï¼Œå³æœåŠ¡å™¨ç¨‹åºå¯ä»¥ç»‘å®šåˆ°æ‰€æœ‰çš„IPä¸Š
 	
-	//server_addr.sin_addr.s_addr=inet_addr("192.168.1.1");  //ÓÃÓÚ°ó¶¨µ½Ò»¸ö¹Ì¶¨IP,inet_addrÓÃÓÚ°ÑÊı×Ö¼Ó¸ñÊ½µÄip×ª»¯ÎªÕûĞÎip
-	server_addr.sin_port=htons(portnumber);         // (½«±¾»úÆ÷ÉÏµÄshortÊı¾İ×ª»¯ÎªÍøÂçÉÏµÄshortÊı¾İ)¶Ë¿ÚºÅ
+	//server_addr.sin_addr.s_addr=inet_addr("192.168.1.1");  //ç”¨äºç»‘å®šåˆ°ä¸€ä¸ªå›ºå®šIP,inet_addrç”¨äºæŠŠæ•°å­—åŠ æ ¼å¼çš„ipè½¬åŒ–ä¸ºæ•´å½¢ip
+	server_addr.sin_port=htons(portnumber);         // (å°†æœ¬æœºå™¨ä¸Šçš„shortæ•°æ®è½¬åŒ–ä¸ºç½‘ç»œä¸Šçš„shortæ•°æ®)ç«¯å£å·
 	
-	/* À¦°ósockfdÃèÊö·ûµ½IPµØÖ· */ 
+	/* æ†ç»‘sockfdæè¿°ç¬¦åˆ°IPåœ°å€ */ 
 	if(bind(sockfd,(struct sockaddr *)(&server_addr),sizeof(struct sockaddr))==-1) 
 	{ 
 		fprintf(stderr,"Bind error:%s\n\a",strerror(errno)); 
 		exit(1); 
 	} 
 
-	/* ÉèÖÃÔÊĞíÁ¬½ÓµÄ×î´ó¿Í»§¶ËÊı */ 
+	/* è®¾ç½®å…è®¸è¿æ¥çš„æœ€å¤§å®¢æˆ·ç«¯æ•° */ 
 	if(listen(sockfd,5)==-1) 
 	{ 
 		fprintf(stderr,"Listen error:%s\n\a",strerror(errno)); 
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
 
 	while(1) 
 	{ 
-		/* ·şÎñÆ÷×èÈû,Ö±µ½¿Í»§³ÌĞò½¨Á¢Á¬½Ó */ 
+		/* æœåŠ¡å™¨é˜»å¡,ç›´åˆ°å®¢æˆ·ç¨‹åºå»ºç«‹è¿æ¥ */ 
 		sin_size=sizeof(struct sockaddr_in); 
 		if((new_fd=accept(sockfd,(struct sockaddr *)(&client_addr),&sin_size))==-1) 
 		{ 
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
 			exit(1); 
 		} 
 
-		fprintf(stderr,"Server get connection from %s\n",inet_ntoa(client_addr.sin_addr)); // ½«ÍøÂçµØÖ·×ª»»³É.×Ö·û´®
+		fprintf(stderr,"Server get connection from %s\n",inet_ntoa(client_addr.sin_addr)); // å°†ç½‘ç»œåœ°å€è½¬æ¢æˆ.å­—ç¬¦ä¸²
 		if((nbytes=read(new_fd,buffer,1024))==-1) 
 		{ 
 			fprintf(stderr,"Read Error:%s\n",strerror(errno)); 
@@ -68,12 +69,12 @@ int main(int argc, char *argv[])
 		} 		
 		buffer[nbytes]='\0';
 		printf("Server received %s\n",buffer);
-		/* Õâ¸öÍ¨Ñ¶ÒÑ¾­½áÊø */ 
+		/* è¿™ä¸ªé€šè®¯å·²ç»ç»“æŸ */ 
 		close(new_fd); 
-		/* Ñ­»·ÏÂÒ»¸ö */ 
+		/* å¾ªç¯ä¸‹ä¸€ä¸ª */ 
 	} 
 
-	/* ½áÊøÍ¨Ñ¶ */ 
+	/* ç»“æŸé€šè®¯ */ 
 	close(sockfd); 
 	exit(0); 
 } 

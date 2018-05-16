@@ -19,13 +19,13 @@ void udps_respon(int sockfd)
 	char msg[MAX_MSG_SIZE]; 
 
 	while(1) 
-	{	/* ´ÓÍøÂçÉÏ¶Á,²¢Ğ´µ½ÍøÂçÉÏ */ 
-		bzero(msg,sizeof(msg)); // ³õÊ¼»¯,ÇåÁã
+	{	/* ä»ç½‘ç»œä¸Šè¯»,å¹¶å†™åˆ°ç½‘ç»œä¸Š */ 
+		bzero(msg,sizeof(msg)); // åˆå§‹åŒ–,æ¸…é›¶
 		addrlen = sizeof(struct sockaddr);
-		n=recvfrom(sockfd,msg,MAX_MSG_SIZE,0,(struct sockaddr*)&addr,&addrlen); // ´Ó¿Í»§¶Ë½ÓÊÕÏûÏ¢
-		msg[n]=0;//½«ÊÕµ½µÄ×Ö·û´®Î²¶ËÌí¼ÓÉÏ×Ö·û´®½áÊø±êÖ¾ 
-		/* ÏÔÊ¾·şÎñ¶ËÒÑ¾­ÊÕµ½ÁËĞÅÏ¢ */ 
-		fprintf(stdout,"Server have received %s",msg); // ÏÔÊ¾ÏûÏ¢
+		n=recvfrom(sockfd,msg,MAX_MSG_SIZE,0,(struct sockaddr*)&addr,&addrlen); // ä»å®¢æˆ·ç«¯æ¥æ”¶æ¶ˆæ¯
+		msg[n]=0;//å°†æ”¶åˆ°çš„å­—ç¬¦ä¸²å°¾ç«¯æ·»åŠ ä¸Šå­—ç¬¦ä¸²ç»“æŸæ ‡å¿— 
+		/* æ˜¾ç¤ºæœåŠ¡ç«¯å·²ç»æ”¶åˆ°äº†ä¿¡æ¯ */ 
+		fprintf(stdout,"Server have received %s",msg); // æ˜¾ç¤ºæ¶ˆæ¯
 	} 
 } 
 
@@ -34,7 +34,7 @@ int main(void)
 	int sockfd; 
 	struct sockaddr_in addr; 
 
-	/* ·şÎñÆ÷¶Ë¿ªÊ¼½¨Á¢socketÃèÊö·û */ 
+	/* æœåŠ¡å™¨ç«¯å¼€å§‹å»ºç«‹socketæè¿°ç¬¦ */ 
 	sockfd=socket(AF_INET,SOCK_DGRAM,0); 
 	if(sockfd<0) 
 	{ 
@@ -42,19 +42,19 @@ int main(void)
 		exit(1); 
 	} 
 
-	/* ·şÎñÆ÷¶ËÌî³ä sockaddr½á¹¹ */ 
+	/* æœåŠ¡å™¨ç«¯å¡«å…… sockaddrç»“æ„ */ 
 	bzero(&addr,sizeof(struct sockaddr_in)); 
 	addr.sin_family=AF_INET; 
 	addr.sin_addr.s_addr=htonl(INADDR_ANY); 
 	addr.sin_port=htons(SERVER_PORT); 
 
-	/* À¦°ósockfdÃèÊö·û */ 
+	/* æ†ç»‘sockfdæè¿°ç¬¦ */ 
 	if(bind(sockfd,(struct sockaddr *)&addr,sizeof(struct sockaddr_in))<0) 
 	{ 
 		fprintf(stderr,"Bind Error:%s\n",strerror(errno)); 
 		exit(1); 
 	} 
 
-	udps_respon(sockfd); // ½øĞĞ¶ÁĞ´²Ù×÷
+	udps_respon(sockfd); // è¿›è¡Œè¯»å†™æ“ä½œ
 	close(sockfd); 
 } 

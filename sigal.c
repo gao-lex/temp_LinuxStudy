@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*×Ô¶¨ÒåĞÅºÅ´¦Àíº¯Êı*/
+/*è‡ªå®šä¹‰ä¿¡å·å¤„ç†å‡½æ•°*/
 void my_func(int sign_no)
 {
 	if(sign_no==SIGINT)
@@ -14,11 +14,11 @@ int main()
 {
 	printf("Waiting for signal SIGINT or SIGQUIT \n ");
 	
-	/*×¢²áĞÅºÅ´¦Àíº¯Êı*/
+	/*æ³¨å†Œä¿¡å·å¤„ç†å‡½æ•°*/
 	signal(SIGINT,my_func);
 	signal(SIGQUIT,my_func);
 	
-	pause();//½«½ø³Ì¹ÒÆğÖ±µ½²¶×½µ½ĞÅºÅÎªÖ¹
+	pause();//å°†è¿›ç¨‹æŒ‚èµ·ç›´åˆ°æ•æ‰åˆ°ä¿¡å·ä¸ºæ­¢
 	exit(0);
 }
 

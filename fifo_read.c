@@ -17,7 +17,7 @@ int main(int argc,char** argv)
 	printf("Preparing for reading bytes...\n");
 	memset(buf_r,0,sizeof(buf_r));
 	
-	/* �򿪹ܵ� */
+	/* 打开管道 */
 	//fd=open(FIFO,O_RDONLY|O_NONBLOCK,0);
 	fd=open(FIFO,O_RDONLY,0);
 	if(fd==-1)
@@ -37,9 +37,9 @@ int main(int argc,char** argv)
 		printf("read %s from FIFO\n",buf_r);
 		sleep(1);
 	}
-   	//�������仰�ǲ��ᱻ���е��ģ�������Ӱ��������е�Ч�����������������ѭ����ִ��ʱ�յ��źź�����Ͻ������ж�û��ִ�к�������仰����Щ���ں�����źŴ����н��������ڲ�����û�й�ϵ����������������ѧϰ���źŴ���֮���������
-	close(fd); //�رչܵ�
-	pause(); /*��ͣ���ȴ��ź�*/
-	unlink(FIFO); //ɾ���ļ�
+   	//后面三句话是不会被运行到的，但不会影响程序运行的效果当程序在上面的死循环中执行时收到信号后会马上结束运行而没有执行后面的三句话。这些会在后面的信号处理中讲到，现在不理解没有关系，这个问题留给大家学习了信号处理之后来解决。
+	close(fd); //关闭管道
+	pause(); /*暂停，等待信号*/
+	unlink(FIFO); //删除文件
 }
 

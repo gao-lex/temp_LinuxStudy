@@ -24,7 +24,7 @@ int main()
     	printf("pthread is not created \n");
     	return -1;
     }
-    rn=pthread_join(pt,&tmp); //µÈ´ıÏß³ÌÍË³ö
+    rn=pthread_join(pt,&tmp); //ç­‰å¾…çº¿ç¨‹é€€å‡º
     
     if(rn)
     {
@@ -32,7 +32,7 @@ int main()
     	return -2;
     }
     
-    printf("thread is exit code %d\n",(int)tmp);  //ÅĞ¶Ï¸ÃÓï¾äÊÇ·ñÄÜÖ´ĞĞ
+    printf("thread is exit code %d\n",(int)tmp);  //åˆ¤æ–­è¯¥è¯­å¥æ˜¯å¦èƒ½æ‰§è¡Œ
     
     return 0;
 	

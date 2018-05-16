@@ -20,9 +20,9 @@ int main()
     int ret;
     struct msg_buf msgbuf;
 	
-	key=ftok("/tmp/2",'a');  /*·µ»ØÎÄ¼şÃû¶ÔÓ¦µÄ¼üÖµ*/
+	key=ftok("/tmp/2",'a');  /*è¿”å›æ–‡ä»¶åå¯¹åº”çš„é”®å€¼*/
 	printf("key=[%x]\n",key);
-	msgid=msgget(key,IPC_CREAT|IPC_EXCL|0666);  /*·µ»ØÓë¼üÖµkeyÏà¶ÔÓ¦µÄÏûÏ¢¶ÓÁĞÃèÊö×Ö*/
+	msgid=msgget(key,IPC_CREAT|IPC_EXCL|0666);  /*è¿”å›ä¸é”®å€¼keyç›¸å¯¹åº”çš„æ¶ˆæ¯é˜Ÿåˆ—æè¿°å­—*/
 	
 	if(msgid==-1)
 	{
@@ -32,7 +32,7 @@ int main()
 	
 	msgbuf.mtype=getpid();
 	strcpy(msgbuf.data,"hello world");
-        ret=msgsnd(msgid,&msgbuf,sizeof(msgbuf.data),IPC_NOWAIT);   /*·¢ËÍÏûÏ¢*/
+        ret=msgsnd(msgid,&msgbuf,sizeof(msgbuf.data),IPC_NOWAIT);   /*å‘é€æ¶ˆæ¯*/
         if(ret==-1)
         {
         	printf("send message error!\n");
@@ -40,7 +40,7 @@ int main()
         }
         
         memset(&msgbuf ,0,sizeof(msgbuf));
-        ret=msgrcv(msgid,&msgbuf,sizeof(msgbuf.data),getpid(),IPC_NOWAIT);   /*½ÓÊÕÏûÏ¢*/
+        ret=msgrcv(msgid,&msgbuf,sizeof(msgbuf.data),getpid(),IPC_NOWAIT);   /*æ¥æ”¶æ¶ˆæ¯*/
         if(ret==-1)
         {
         	printf("recv message error!\n");

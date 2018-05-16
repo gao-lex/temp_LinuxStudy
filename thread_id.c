@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-/*Ïß³ÌÖ´ĞĞº¯Êı*/
+/*çº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
 void *create(void *arg)
 {
     printf("New thread ...\n");
@@ -23,7 +23,7 @@ int main(int argc,char *argv[])
         printf("phread is not created...\n");
         return -1;
     }
-    /*½ø³ÌÓëÆäÏß³Ì´´½¨µÄpidÒ»ÑùÂğ£¿*/
+    /*è¿›ç¨‹ä¸å…¶çº¿ç¨‹åˆ›å»ºçš„pidä¸€æ ·å—ï¼Ÿ*/
     printf("This main process's id is %d\n",getpid()); 
     sleep(1); 
 

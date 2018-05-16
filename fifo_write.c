@@ -17,11 +17,11 @@ int main(int argc,char** argv)
 	memset(w_buf,0,sizeof(w_buf));
 	
 
-    /*´´½¨ÓĞÃû¹ÜµÀ*/
+    /*åˆ›å»ºæœ‰åç®¡é“*/
 	if((mkfifo(FIFO_SERVER,O_CREAT|O_EXCL|O_RDWR)<0)&&(errno!=EEXIST))
 		printf("cannot create fifoserver\n");
 
-	/*´ò¿ª¹ÜµÀ*/
+	/*æ‰“å¼€ç®¡é“*/
 	//fd=open(FIFO_SERVER,O_RDWR|O_NONBLOCK,0);
 	fd=open(FIFO_SERVER,O_RDWR,0);
 	if(fd==-1)
@@ -30,7 +30,7 @@ int main(int argc,char** argv)
 		exit(1);
 	}
 	
-	/*Èë²Î¼ì²â*/
+	/*å…¥å‚æ£€æµ‹*/
 	if(argc==1)
 	{
 		printf("Please send something\n");
@@ -38,7 +38,7 @@ int main(int argc,char** argv)
 	}
 	strcpy(w_buf,argv[1]);
 	
-	/* Ïò¹ÜµÀĞ´ÈëÊı¾İ */
+	/* å‘ç®¡é“å†™å…¥æ•°æ® */
 	if((nwrite=write(fd,w_buf,100))==-1)
 	{
 		if(errno==EAGAIN)
@@ -46,7 +46,7 @@ int main(int argc,char** argv)
 	}
 	else 
 		printf("write %s to the FIFO\n",w_buf);
-	close(fd); //¹Ø±Õ¹ÜµÀ
+	close(fd); //å…³é—­ç®¡é“
 	return 0;
 }
 

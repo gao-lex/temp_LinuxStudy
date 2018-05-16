@@ -17,7 +17,7 @@ void udpc_requ(int sockfd,const struct sockaddr_in *addr,int len)
 	char buffer[MAX_BUF_SIZE]; 
 	int n; 
 	while(1) 
-	{ 	/* ´Ó¼üÅÌ¶ÁÈë,Ğ´µ½·şÎñ¶Ë */ 
+	{ 	/* ä»é”®ç›˜è¯»å…¥,å†™åˆ°æœåŠ¡ç«¯ */ 
 		printf("Please input char:\n");
 		fgets(buffer,MAX_BUF_SIZE,stdin); 
 		sendto(sockfd,buffer,strlen(buffer),0,(struct sockaddr *)addr,len); 
@@ -36,7 +36,7 @@ int main(int argc,char **argv)
 		exit(1); 
 	}
 
-	/* ½¨Á¢ sockfdÃèÊö·û */ 
+	/* å»ºç«‹ sockfdæè¿°ç¬¦ */ 
 	sockfd=socket(AF_INET,SOCK_DGRAM,0); 
 	if(sockfd<0) 
 	{ 
@@ -44,16 +44,16 @@ int main(int argc,char **argv)
 		exit(1); 
 	} 
 
-	/* Ìî³ä·şÎñ¶ËµÄ×ÊÁÏ */ 
+	/* å¡«å……æœåŠ¡ç«¯çš„èµ„æ–™ */ 
 	bzero(&addr,sizeof(struct sockaddr_in)); 
 	addr.sin_family=AF_INET; 
 	addr.sin_port=htons(SERVER_PORT);
-	if(inet_aton(argv[1],&addr.sin_addr)<0)  /*inet_atonº¯ÊıÓÃÓÚ°Ñ×Ö·û´®ĞÍµÄIPµØÖ·×ª»¯³ÉÍøÂç2½øÖÆÊı×Ö*/ 
+	if(inet_aton(argv[1],&addr.sin_addr)<0)  /*inet_atonå‡½æ•°ç”¨äºæŠŠå­—ç¬¦ä¸²å‹çš„IPåœ°å€è½¬åŒ–æˆç½‘ç»œ2è¿›åˆ¶æ•°å­—*/ 
 	{ 
 		fprintf(stderr,"Ip error:%s\n",strerror(errno)); 
 		exit(1); 
 	} 
 
-	udpc_requ(sockfd,&addr,sizeof(struct sockaddr_in)); // ½øĞĞ¶ÁĞ´²Ù×÷
+	udpc_requ(sockfd,&addr,sizeof(struct sockaddr_in)); // è¿›è¡Œè¯»å†™æ“ä½œ
 	close(sockfd); 
 } 

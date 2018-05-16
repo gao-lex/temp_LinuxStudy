@@ -16,19 +16,19 @@ int main()
 	
 	memset(buf_r,0,sizeof(buf_r));
 	
-	/*´´½¨¹ÜµÀ*/
+	/*åˆ›å»ºç®¡é“*/
 	if(pipe(pipe_fd)<0)
 	{
 		printf("pipe create error\n");
 		return -1;
 	}
 	
-	/*´´½¨×Ó½ø³Ì*/
-	if((pid=fork())==0)  //×Ó½ø³ÌÖ´ĞĞĞòÁĞ
+	/*åˆ›å»ºå­è¿›ç¨‹*/
+	if((pid=fork())==0)  //å­è¿›ç¨‹æ‰§è¡Œåºåˆ—
 	{
 		printf("\n");
-		close(pipe_fd[1]);//×Ó½ø³ÌÏÈ¹Ø±ÕÁË¹ÜµÀµÄĞ´¶Ë
-		sleep(2); /*ÈÃ¸¸½ø³ÌÏÈÔËĞĞ£¬ÕâÑù¸¸½ø³ÌÏÈĞ´×Ó½ø³Ì²ÅÓĞÄÚÈİ¶Á*/
+		close(pipe_fd[1]);//å­è¿›ç¨‹å…ˆå…³é—­äº†ç®¡é“çš„å†™ç«¯
+		sleep(2); /*è®©çˆ¶è¿›ç¨‹å…ˆè¿è¡Œï¼Œè¿™æ ·çˆ¶è¿›ç¨‹å…ˆå†™å­è¿›ç¨‹æ‰æœ‰å†…å®¹è¯»*/
 		if((r_num=read(pipe_fd[0],buf_r,100))>0)
 		{
 			printf("child process is reading...\n");
@@ -36,15 +36,15 @@ int main()
 		}	
 		exit(0);
   	}
-	else if(pid>0) //¸¸½ø³ÌÖ´ĞĞĞòÁĞ
+	else if(pid>0) //çˆ¶è¿›ç¨‹æ‰§è¡Œåºåˆ—
 	{
-		close(pipe_fd[0]); //¸¸½ø³ÌÏÈ¹Ø±ÕÁË¹ÜµÀµÄ¶Á¶Ë
+		close(pipe_fd[0]); //çˆ¶è¿›ç¨‹å…ˆå…³é—­äº†ç®¡é“çš„è¯»ç«¯
         //printf("parent process is writing...\n");
 		if(write(pipe_fd[1],"Hello",5)!=-1)
 			printf("parent write1 Hello!\n");
 		if(write(pipe_fd[1]," Pipe",5)!=-1)
 			printf("parent write2 Pipe!\n");
-		waitpid(pid,NULL,0); /*µÈ´ı×Ó½ø³Ì½áÊø*/
+		waitpid(pid,NULL,0); /*ç­‰å¾…å­è¿›ç¨‹ç»“æŸ*/
 		exit(0);
 	}
 	return 0;

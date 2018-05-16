@@ -15,7 +15,7 @@ int main()
    if(vfork()==0)
    {  close(fd[0]);
        dup2(fd[1],stdout); 
-            // lsÃüÁîµÄ±ê×¼Êä³öÖ¸Ïò¹ÜµÀµÄĞ´¶Ë¿Ú
+            // lså‘½ä»¤çš„æ ‡å‡†è¾“å‡ºæŒ‡å‘ç®¡é“çš„å†™ç«¯å£
        execv("/bin/ls",argv1);  }
     else
      {  close(fd[1]);

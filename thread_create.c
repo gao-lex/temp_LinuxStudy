@@ -25,7 +25,7 @@ int main()
     int i=0,rn=0;
     pthread_t pt1,pt2;
     
-    /*创建线程1*/
+    /*鍒涘缓绾跨▼1*/
     rn=pthread_create(&pt1,NULL,(void *)myThread1,NULL);
     if(rn)
     {
@@ -33,7 +33,7 @@ int main()
     	return 1;
     }
     
-    /*创建线程2*/
+    /*鍒涘缓绾跨▼2*/
     rn=pthread_create(&pt2,NULL,(void *)myThread2,NULL);
     if(rn)
     {
@@ -44,5 +44,5 @@ int main()
     pthread_join(pt2,NULL);
     
     return 0;
-	
+
 }

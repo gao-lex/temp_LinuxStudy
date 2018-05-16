@@ -10,19 +10,19 @@ int main(void)
 {
 	pid_t child;
 
-	/* ´´½¨×Ó½ø³Ì */
+	/* åˆ›å»ºå­è¿›ç¨‹ */
 	if((child=fork())==-1)
 	{
 		printf("Fork Error : %s\n", strerror(errno));
 		exit(1);
 	}
 	else 
-		if(child==0) // ×Ó½ø³Ì
+		if(child==0) // å­è¿›ç¨‹
 		{
 			printf("I am the child: %d\n", getpid());
 			exit(0);
 		}
-		else        //¸¸½ø³Ì
+		else        //çˆ¶è¿›ç¨‹
 		{
 			printf("I am the father:%d\n",getpid());
 			return 0;

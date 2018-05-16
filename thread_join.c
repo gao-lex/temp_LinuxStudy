@@ -17,12 +17,12 @@ int main()
     pthread_t pth;
     int i;
 
-	/*´´½¨Ïß³Ì²¢Ö´ÐÐÏß³ÌÖ´ÐÐº¯Êý*/
+	/*åˆ›å»ºçº¿ç¨‹å¹¶æ‰§è¡Œçº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
     int ret = pthread_create(&pth, NULL, thread, NULL);
     
 	printf("The main process will be to run,but will be blocked soon\n");
 	
-	/*×èÈûµÈ´ýÏß³ÌÍË³ö*/
+	/*é˜»å¡žç­‰å¾…çº¿ç¨‹é€€å‡º*/
     //pthread_join(pth, NULL);
 
     printf("thread was exit\n");

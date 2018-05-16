@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	int n;
 	int nbytes;
 	
-	/* ·şÎñÆ÷¶Ë¿ªÊ¼½¨Á¢sockfdÃèÊö·û */ 
+	/* æœåŠ¡å™¨ç«¯å¼€å§‹å»ºç«‹sockfdæè¿°ç¬¦ */ 
 	if((listen_fd=socket(AF_INET,SOCK_STREAM,0))==-1) // AF_INET:IPV4;SOCK_STREAM:TCP
 	{ 
 		printf("Socket error:%s\n\a",strerror(errno)); 
@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
 	} 
 
 
-	bzero(&client_addr,sizeof(struct sockaddr_in)); // ³õÊ¼»¯,ÖÃ0
+	bzero(&client_addr,sizeof(struct sockaddr_in)); // åˆå§‹åŒ–,ç½®0
 	client_addr.sin_family=AF_INET;                 // Internet
-	client_addr.sin_addr.s_addr=htonl(INADDR_ANY);  // (½«±¾»úÆ÷ÉÏµÄlongÊı¾İ×ª»¯ÎªÍøÂçÉÏµÄlongÊı¾İ)·şÎñÆ÷³ÌĞòÄÜÔËĞĞÔÚÈÎºÎipµÄÖ÷»úÉÏ  //INADDR_ANY ±íÊ¾Ö÷»ú¿ÉÒÔÊÇÈÎÒâIPµØÖ·£¬¼´·şÎñÆ÷³ÌĞò¿ÉÒÔ°ó¶¨µ½ËùÓĞµÄIPÉÏ
-	//server_addr.sin_addr.s_addr=inet_addr("192.168.1.1");  //ÓÃÓÚ°ó¶¨µ½Ò»¸ö¹Ì¶¨IP,inet_addrÓÃÓÚ°ÑÊı×Ö¼Ó¸ñÊ½µÄip×ª»¯ÎªÕûĞÎip
+	client_addr.sin_addr.s_addr=htonl(INADDR_ANY);  // (å°†æœ¬æœºå™¨ä¸Šçš„longæ•°æ®è½¬åŒ–ä¸ºç½‘ç»œä¸Šçš„longæ•°æ®)æœåŠ¡å™¨ç¨‹åºèƒ½è¿è¡Œåœ¨ä»»ä½•ipçš„ä¸»æœºä¸Š  //INADDR_ANY è¡¨ç¤ºä¸»æœºå¯ä»¥æ˜¯ä»»æ„IPåœ°å€ï¼Œå³æœåŠ¡å™¨ç¨‹åºå¯ä»¥ç»‘å®šåˆ°æ‰€æœ‰çš„IPä¸Š
+	//server_addr.sin_addr.s_addr=inet_addr("192.168.1.1");  //ç”¨äºç»‘å®šåˆ°ä¸€ä¸ªå›ºå®šIP,inet_addrç”¨äºæŠŠæ•°å­—åŠ æ ¼å¼çš„ipè½¬åŒ–ä¸ºæ•´å½¢ip
 	n=1;
 	
-	/* À¦°ósockfdÃèÊö·ûµ½IPµØÖ· */ 
+	/* æ†ç»‘sockfdæè¿°ç¬¦åˆ°IPåœ°å€ */ 
 	//setsockopt(listen_fd,SOL_SOCKET,SO_REUSEADDR,&n,sizeof(int));
         client_addr.sin_port=htons(portnumber);
 	if(bind(listen_fd,(struct sockaddr *)(&client_addr),sizeof(client_addr))==-1) 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		exit(1); 
 	} 
 
-	/* ÉèÖÃÔÊĞíÁ¬½ÓµÄ×î´ó¿Í»§¶ËÊı */ 
+	/* è®¾ç½®å…è®¸è¿æ¥çš„æœ€å¤§å®¢æˆ·ç«¯æ•° */ 
 	listen(listen_fd,5); 
 	
 	while(1) 
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		} 		
 		if((n=fork())==0)
 		{             
-			/* ×Ó½ø³Ì´¦Àí¿Í»§¶ËµÄÁ¬½Ó */ 
+			/* å­è¿›ç¨‹å¤„ç†å®¢æˆ·ç«¯çš„è¿æ¥ */ 
 		        char buffer[1024];
 		        if((nbytes=read(accept_fd,buffer,1024))==-1)
 		        {

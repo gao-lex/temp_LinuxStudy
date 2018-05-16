@@ -7,16 +7,16 @@ int main(void)
 {
 	pid_t pc,pr;
 
-	/* ´´½¨×Ó½ø³Ì */
+	/* åˆ›å»ºå­è¿›ç¨‹ */
 	pc=vfork();
 	if(pc==0)
 	{
 		printf("I am the child: %d\n", getpid());
 	        sleep(10);
 	}
-	else if(pc>0)       //¸¸½ø³Ì
+	else if(pc>0)       //çˆ¶è¿›ç¨‹
 		{
-			pr=wait(NULL); //µÈµ½×Ó½ø³ÌÍË³ö£¬¸¸½ø³Ì²Å»áÔËĞĞ
+			pr=wait(NULL); //ç­‰åˆ°å­è¿›ç¨‹é€€å‡ºï¼Œçˆ¶è¿›ç¨‹æ‰ä¼šè¿è¡Œ
 			printf("I am the father:%d\n",getpid());
 		}
 	exit(0);

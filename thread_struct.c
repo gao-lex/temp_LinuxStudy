@@ -9,7 +9,7 @@ struct menber
     char *s;
 };
 
-/*Ïß³ÌÖ´ĞĞº¯Êı*/
+/*çº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
 void *create(void *arg)
 {
     struct menber *temp;
@@ -25,12 +25,12 @@ int main(int argc,char *argv[])
     int error;
     struct menber *b;
 
-	/*Îª½á¹¹ÌåÖ¸Õëb·ÖÅäÄÚ´æ²¢¸³Öµ*/
+	/*ä¸ºç»“æ„ä½“æŒ‡é’ˆbåˆ†é…å†…å­˜å¹¶èµ‹å€¼*/
     b=(struct menber *)malloc( sizeof(struct menber) );
     b->a = 4;
     b->s = "Linux!";
     
-	/*´´½¨Ïß³Ì²¢ÔËĞĞÏß³ÌÖ´ĞĞº¯Êı*/
+	/*åˆ›å»ºçº¿ç¨‹å¹¶è¿è¡Œçº¿ç¨‹æ‰§è¡Œå‡½æ•°*/
     error = pthread_create(&tidp, NULL, create, (void *)b);
     if( error )
     {
@@ -38,7 +38,7 @@ int main(int argc,char *argv[])
         return -1;
     }
 
-    sleep(1); //½ø³ÌË¯ÃßÒ»ÃëÊ¹Ïß³ÌÖ´ĞĞÍêºó½ø³Ì²Å»á½áÊø
+    sleep(1); //è¿›ç¨‹ç¡çœ ä¸€ç§’ä½¿çº¿ç¨‹æ‰§è¡Œå®Œåè¿›ç¨‹æ‰ä¼šç»“æŸ
 
     printf("pthread is created...\n");
     return 0;

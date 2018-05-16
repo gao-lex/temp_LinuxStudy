@@ -22,40 +22,40 @@ int main(int argc, char *argv[])
 		exit(1); 
 	} 
 
-    /* Ê¹ÓÃhostname²éÑ¯host Ãû×Ö */
+    /* ä½¿ç”¨hostnameæŸ¥è¯¢host åå­— */
 	if((host=gethostbyname(argv[1]))==NULL) 
 	{ 
 		fprintf(stderr,"Gethostname error\n"); 
 		exit(1); 
 	} 
-
-	/* ¿Í»§³ÌĞò¿ªÊ¼½¨Á¢ sockfdÃèÊö·û */ 
+	printf("hostname %s\n",host->h_name);
+	/* å®¢æˆ·ç¨‹åºå¼€å§‹å»ºç«‹ sockfdæè¿°ç¬¦ */ 
 	if((sockfd=socket(AF_INET,SOCK_STREAM,0))==-1) // AF_INET:Internet;SOCK_STREAM:TCP
 	{ 
 		fprintf(stderr,"Socket Error:%s\a\n",strerror(errno)); 
 		exit(1); 
 	} 
 
-	/* ¿Í»§³ÌĞòÌî³ä·şÎñ¶ËµÄ×ÊÁÏ */ 
-	bzero(&server_addr,sizeof(server_addr)); // ³õÊ¼»¯,ÖÃ0
+	/* å®¢æˆ·ç¨‹åºå¡«å……æœåŠ¡ç«¯çš„èµ„æ–™ */ 
+	bzero(&server_addr,sizeof(server_addr)); // åˆå§‹åŒ–,ç½®0
 	server_addr.sin_family=AF_INET;          // IPV4
-	server_addr.sin_port=htons(portnumber);  // (½«±¾»úÆ÷ÉÏµÄshortÊı¾İ×ª»¯ÎªÍøÂçÉÏµÄshortÊı¾İ)¶Ë¿ÚºÅ
-	server_addr.sin_addr=*((struct in_addr *)host->h_addr); // IPµØÖ·
+	server_addr.sin_port=htons(portnumber);  // (å°†æœ¬æœºå™¨ä¸Šçš„shortæ•°æ®è½¬åŒ–ä¸ºç½‘ç»œä¸Šçš„shortæ•°æ®)ç«¯å£å·
+	server_addr.sin_addr=*((struct in_addr *)host->h_addr); // IPåœ°å€
 	
-	/* ¿Í»§³ÌĞò·¢ÆğÁ¬½ÓÇëÇó */ 
+	/* å®¢æˆ·ç¨‹åºå‘èµ·è¿æ¥è¯·æ±‚ */ 
 	if(connect(sockfd,(struct sockaddr *)(&server_addr),sizeof(struct sockaddr))==-1) 
 	{ 
 		fprintf(stderr,"Connect Error:%s\a\n",strerror(errno)); 
 		exit(1); 
 	} 
 
-	/* Á¬½Ó³É¹¦ÁË */ 
+	/* è¿æ¥æˆåŠŸäº† */ 
 	printf("Please input char:\n");
 	
-	/* ·¢ËÍÊı¾İ */
+	/* å‘é€æ•°æ® */
 	fgets(buffer,1024,stdin); 
 	write(sockfd,buffer,strlen(buffer)); 
-	/* ½áÊøÍ¨Ñ¶ */ 
+	/* ç»“æŸé€šè®¯ */ 
 	close(sockfd); 
 	exit(0); 
 } 

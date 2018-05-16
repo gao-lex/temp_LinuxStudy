@@ -12,7 +12,7 @@ int main(int argc,char *argv[])
            puts("please input the open file pathname!\n"); 
            exit(1); 
         }
-        //fd=open(argv[1],O_RDWR),½ö½öÖ»ÊÇ´ò¿ªÖ¸¶¨ÎÄ¼ş£¬Èç¹û¸ÃÎÄ¼ş²»´æÔÚ¾Í»á±¨´í¡£
+        //fd=open(argv[1],O_RDWR),ä»…ä»…åªæ˜¯æ‰“å¼€æŒ‡å®šæ–‡ä»¶ï¼Œå¦‚æœè¯¥æ–‡ä»¶ä¸å­˜åœ¨å°±ä¼šæŠ¥é”™ã€‚
         if((fd=open(argv[1],O_CREAT|O_RDWR,0755))<0)
         {
 	   printf("open file failure!\n");
